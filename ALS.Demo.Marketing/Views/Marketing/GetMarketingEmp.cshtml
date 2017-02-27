@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ALS.Demo.Marketing.DataAccessLayer.Marketing>
+
+@{
+    ViewBag.Title = "GetMarketingEmp";
+}
+
+<h3>Marketing Employee Details</h3>
+
+<p>
+    @Html.ActionLink("Add New Employee TO Marketing", "MarketingProfile", "Marketing", null, new { @class = "btn btn-primary" })
+</p>
+
+
+
+<table id="market" class=" table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarketerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Delete", "Marketing", new { id = item.Id }))
+        { 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            
+            <td>
+                <input type="submit" value="Close Marketing" class="btn btn-default" onclick="return confirm('Are You Sure,You Want To Close Marketing For @item.EmpName')" />
+
+            </td>
+
+            @*<td>
+                <button class="btn-link js-delete"> Delete</button>
+            </td>
+
+                 
+
+            <td>
+                @Html.ActionLink("Close Marketing", "Delete", new { id = item.Id })
+
+            </td>*@
+            @*<td>
+
+                    @Html.ActionLink("Details", "Details", new { id=item.EmpId }) |
+
+                </td>*@
+        </tr>
+        }
+    }
+    
+   
+
+</table>
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#market").DataTable();
+        });
+
+       
+
+     </script>
+  }
+
+
+

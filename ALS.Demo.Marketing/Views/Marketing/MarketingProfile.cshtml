@@ -1,0 +1,90 @@
+﻿@model ALS.Demo.Marketing.DataAccessLayer.MarketingProperties
+
+@{
+    ViewBag.Title = "";
+}
+
+<center style="color:brown"><h3>Add Employee Marketing Details</h3> </center>
+
+
+
+@using (Html.BeginForm("Save", "Marketing"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmpName, htmlAttributes: new { @class = "control-label col-md-2" }):
+
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.EmpName, new SelectList(ViewBag.Sai, "Value", "Text"), "--Select Employee--", new { @class = "form-control" })
+
+                @*@Html.DropDownList("items", null, "Select Employee", new { @class = "form-control" })*@
+
+
+                @*@Html.DropDownList("Sai", "Select Employe")*@
+
+                
+               
+
+                @Html.ValidationMessageFor(c => c.EmpName, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MarketerName, "Marketer Name", htmlAttributes: new { @class = "control-label col-md-2" }):
+
+            <div class="col-md-9">
+                @*@Html.DropDownList("items1", null, "Select Marketer", new { @class = "form-control" })*@
+                @*@Html.DropDownList("Name", "Select Marketer")*@
+                @Html.DropDownListFor(model => model.MarketerName, new SelectList(ViewBag.Name, "Value", "Text"), "--Select Marketer--", new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(c => c.MarketerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" }):
+
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" }):
+
+            <div class="col-md-9">
+                @Html.DropDownListFor(m => m.Status,
+                new List<SelectListItem>{
+             new SelectListItem { Text = "Open", Value = "Open" },
+             new SelectListItem {Text="Closed",Value="Closed"}}, "Select Status", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "GetEmployees")
+</div>

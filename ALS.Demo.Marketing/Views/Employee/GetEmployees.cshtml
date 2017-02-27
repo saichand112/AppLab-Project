@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ALS.Demo.Marketing.DataAccessLayer.Employee>
+
+@{
+    ViewBag.Title = "Employees";
+}
+<div style="color:#0094ff">
+    <center> <h3>AppLab System Employee Information</h3> </center>
+
+    
+
+</div>
+
+
+<p>
+    @Html.ActionLink("Add Employe", "Create", "Employee", null, new { @class = "btn btn-primary" })
+</p>
+
+
+    @Html.AntiForgeryToken()
+
+
+<table id="employe" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Employe Names</th>
+            <th> Employee Details</th>
+            <th> Edit Employee</th>
+
+            <th> Delete Employee</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("DeleteConfirmed", "Employee", new { id = item.Id }))
+        {
+
+        @Html.HiddenFor(model => item.Id)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+
+            <td> @Html.ActionLink("Details", "Details", new { id = item.Id }) </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+            </td>
+           
+            
+            @*<td>
+
+                
+                    <input type="submit" value="Delete" onclick="return confirm('Are You Sure, You Want To Delete @item.FirstName Detais')" />
+                
+                
+                
+            </td>*@
+            
+            
+
+
+            @*@@<td>  <button data-customer-id="@item.Id" class="btn-link  js-delete"> Delete</button></td>*@
+        </tr>
+    
+    
+    }
+    }
+
+</table>
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#employe").DataTable();
+
+
+            //$("#employe ").on("click", ".js-delete", function () {
+            //    var button = $(this);
+
+            //    if(confirm("Are you sure You Want to Delete This Customer?")) {
+                    
+            //            $.ajax({
+
+            //                url: "/Employee/" + button.attr("data-customer-id"),
+            //                method: "DELETE",
+            //                success: function () {
+            //                    console.log("Success");
+
+            //                    //button.parents("tr").remove();
+            //                }
+
+            //            });
+            //        }
+                    
+            //    });
+                
+            });
+
+       
+
+   </script>
+ }
